@@ -14,6 +14,41 @@ exports.serveAssets = function(res, asset, callback) {
   fs.readFile(archive.paths.siteAssets + asset, 'utf8', function(err, data){
     callback(data);
   });
+
+  //
+  // var filePath = __dirname + '/public/' + url;
+  // var ext = $path.extname(filePath);
+  //
+  // if(ext === '.css') {
+  //   headers['Content-Type'] = 'text/css';
+  // }
+  //
+  // if(ext === '.js') {
+  //   headers['Content-Type'] = 'application/javascript';
+  // }
+  //
+  // if (filePath) {
+  //   fs.readFile(filePath, 'utf8', function(err, data) {
+  //     res.writeHead(200, headers);
+  //     res.end(data);
+  //   });
+  //   return;
+  // }
+  // if(req.url === '/www.google.com') {
+  //   var path = archive.paths.archivedSites + req.url;
+  //   fs.exists(path, function(exists){
+  //     if (exists) {
+  //       fs.readFile(path, 'utf8', function(err, data){
+  //         if(err){
+  //           return "File Not Found: " + err;
+  //         } else {
+  //           res.writeHead(200, headers);
+  //           res.end(data);
+  //           return;
+  //         }
+  //       });
+  //     }
+  //   });
 };
 
 exports.serveArchives = function(res, archiveUrl, callback){

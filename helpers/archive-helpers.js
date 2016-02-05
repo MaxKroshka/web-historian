@@ -32,7 +32,7 @@ exports.readListOfUrls = function(callback) {
     } else {
       callback(content.split('\n'));
     }
-  })
+  });
 };
 
 exports.isUrlInList = function(url, callback) {
@@ -43,14 +43,14 @@ exports.isUrlInList = function(url, callback) {
 
 exports.addUrlToList = function(url, callback) {
   fs.appendFile(exports.paths.list, url+'\n', 'utf8', function(err){
-    if(err) { "File Not Written: " + err; }
+    if(err) { throw err; }
     callback();
   });
 };
 
 exports.isUrlArchived = function(url, callback) {
   fs.readdir(exports.paths.archivedSites, function(err, content){
-    if(err){ return "Error "+ err}
+    if(err){ throw err; }
     callback(_.contains(content, url));
   });
 };
@@ -61,11 +61,11 @@ exports.downloadUrls = function(array) {
       httpReq.get('http://'+url, function(err, content){
         if(content.code === 200){
           var html = content.buffer.toString();
-          fs.writeFile(exports.paths.archivedSites+'/'+url, html, 'utf8', function(err){
-              if(err){throw err}
+          fs.writeFile(exports.paths.archivedSites + '/' + url, html, 'utf8', function(err){
+              if(err){ throw err; }
           });
         }
-      })
+      });
     }
   });
 };
